@@ -2,12 +2,12 @@ export default class WeatherTile extends HTMLElement {
 	constructor(currentDay, maxTemp = 0, minTemp = 0) {
 		super();
 
-		let str = '';
+		let bg = '';
 		if (currentDay)
-			str='bg-light';
+			bg='bg-light';
 
 		this.innerHTML =
-			`<div class="m-3 col card ${str} d-flex flex-column">
+			`<div class="m-3 col card ${bg} d-flex flex-column">
 			<span class="d-inline-flex mb-4 justify-content-between">
 			  <h3 class="m-1">Thu</h3>
 			  <h3 class="m-1">10/4</h3>

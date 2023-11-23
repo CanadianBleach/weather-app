@@ -13,18 +13,22 @@ let weatherData = await fetchWeather(url);
 
 header.textContent = `Weather - ${weatherData.city.name}`;
 
-container.appendChild(new WeatherTile(true, weatherData.list[0].main.temp_min, weatherData.list[0].main.temp_max));
+// Todo get the date parsed
+// Get city search implemented
+// Icon switching
 
-for (let i = 0; i < 3; i++) {
-    container.appendChild(new WeatherTile());
+for (let i = 0; i < 5; i++) {
+  let min = Math.round((weatherData.list[i].main.temp_min - 273.15) * 9 / 5 + 32);
+  let max = Math.round((weatherData.list[i].main.temp_max - 273.15) * 9 / 5 + 32);
+  container.appendChild(new WeatherTile(false, min, max));
 }
 
 async function fetchWeather(url) {
   try {
-      const response = await fetch(url);
-      const data = await response.json();
-      return data;
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
   } catch (error) {
-      console.error(error);
+    console.error(error);
   }
 }
