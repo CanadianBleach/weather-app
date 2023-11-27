@@ -17,10 +17,9 @@ header.textContent = `Weather - ${weatherData.city.name}`;
 // Get city search implemented
 // Icon switching
 
-for (let i = 0; i < 5; i++) {
-  let min = Math.round((weatherData.list[i].main.temp_min - 273.15) * 9 / 5 + 32);
-  let max = Math.round((weatherData.list[i].main.temp_max - 273.15) * 9 / 5 + 32);
-  container.appendChild(new WeatherTile(false, min, max));
+// Create a tile for days we want
+for (let i = 0; i < 6; i++) {
+  container.appendChild(new WeatherTile(weatherData.list[i * 8]));
 }
 
 async function fetchWeather(url) {
