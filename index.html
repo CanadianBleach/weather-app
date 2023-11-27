@@ -18,11 +18,19 @@
     <title>Weather App</title>
   </head>
   <body>
-    <h1 class="display-3 text-center m-3 row">Weather</h1>
-    <div
-      id="tile-parent"
-      class="w-100 d-flex flex-wrap fle p-2 justify-content-around"
-    >
+    <div class="min-vh-100">
+      <div class="d-flex justify-content-center align-items-center">
+      <form class="">
+        <div class="form-group">
+          <input
+            class="form-control text-center"
+            id="city"
+            placeholder="Bangkok, Thailand"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
     </div>
     <script src="./assets/scripts/script.js" type="module"></script>
     <script
