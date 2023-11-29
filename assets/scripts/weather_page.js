@@ -1,5 +1,5 @@
 import WeatherTile from '../utils/weather_tile.js';
-import key from '../utils/key.js';
+let key = '405cb79edbe390f6b9aaa5ccfb9e4af9';
 
 let container = document.querySelector("#tile-parent");
 let header = document.querySelector("h1");
@@ -16,13 +16,6 @@ header.textContent = `Weather - ${weatherData.city.name}`;
 // Get city search implemented
 // Icon switching
 
-// Create a tile for days we want
-for (let i = 0; i < 5; i++) {
-  let elem = new WeatherTile(weatherData.list[i * 8]);
-  elem.classList.add("col-sm");
-  container.appendChild(elem);
-}
-
 async function fetchWeather(url) {
   try {
     const response = await fetch(url);
@@ -32,3 +25,31 @@ async function fetchWeather(url) {
     console.error(error);
   }
 }
+
+function getSearches() {
+  let data = localStorage.getItem("search_history");
+  let searches = JSON.parse(data);
+
+  return searches;
+}
+
+function init() {
+  let searches = getSearches();
+  console.log(searches);
+
+  // Todo search for city
+
+  // Cards for past searches
+  // Buttons, remove search from array -> push to top -> reload page
+  // If we wanna be cheeky, cards would be cooler fs but kinda a pain
+
+  // Create a tile for days we want
+  for (let i = 0; i < 5; i++) {
+    let elem = new WeatherTile(weatherData.list[i * 8]);
+    elem.classList.add("col-sm");
+    container.appendChild(elem);
+  }
+
+}
+
+init();
