@@ -1,17 +1,12 @@
-let url = `http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid=`;
+import { key } from '../utils/key.js';
+import { fetchData } from '../utils/utils.js';
 
 let form = document.querySelector("#search");
 let search = document.querySelector("#city");
 
-form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    saveSearch(textToSearch(search.value));
-    window.location.replace('../assets/pages/weather.html');
-});
-
 // Create seatch object from string
 function textToSearch(string) {
-    let parsed = string.replaceAll(',','');
+    let parsed = string.replaceAll(',', '');
     let words = parsed.split(' ');
 
     // In case its a single search
@@ -20,24 +15,55 @@ function textToSearch(string) {
     }
 
     let search = {
-        city : words[0],
-        state : words[1],
+        city: words[0],
+        state: words[1],
     }
 
     return search;
 }
 
-function saveSearch(search) {
-    let data = localStorage.getItem("search_history");
-    let searches = JSON.parse(data);
+function saveCity(city) {
+    let data = localStorage.getItem("city_history");
+    let cities = JSON.parse(data);
 
-    if (searches == null) {
-        searches = [
-            search,
+    if (cities == null) {
+        cities = [
+            city,
         ]
     } else {
-        searches.unshift(search);
+        cities.unshift(city);
     }
 
-    localStorage.setItem('search_history', JSON.stringify(searches))
+    localStorage.setItem('city_history', JSON.stringify(city))
 }
+
+// Search for city
+async function searchFor(string) {
+    let toSearch = textToSearch(string);
+    let url = `http://api.openweathermap.org/geo/1.0/direct?q=${toSearch.city},${toSearch.state},USA&appid=${key}`;
+
+    return await fetchData(url);
+}
+
+function init() {
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        doStuff();
+        // Search for city
+        let city = await searchFor(search.value);
+        if (city == null)
+            return;
+
+        // Save city to local storage
+        console.log(city);
+        saveCity(city);
+
+        // Go to weather page
+        //window.location.replace('../assets/pages/weather.html');
+    });
+}
+
+init();
+
+export { fetchData };

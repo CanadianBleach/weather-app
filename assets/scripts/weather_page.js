@@ -1,5 +1,6 @@
 import WeatherTile from '../utils/weather_tile.js';
-let key = '405cb79edbe390f6b9aaa5ccfb9e4af9';
+import { key } from '../utils/key.js';
+import { fetchData } from '../utils/utils.js';
 
 let container = document.querySelector("#tile-parent");
 let header = document.querySelector("h1");
@@ -8,7 +9,7 @@ let lon = 80.814;
 
 let url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}`;
 
-let weatherData = await fetchWeather(url);
+let weatherData = await fetchData(url);
 
 header.textContent = `Weather - ${weatherData.city.name}`;
 
@@ -16,25 +17,15 @@ header.textContent = `Weather - ${weatherData.city.name}`;
 // Get city search implemented
 // Icon switching
 
-async function fetchWeather(url) {
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-function getSearches() {
-  let data = localStorage.getItem("search_history");
+function getCities() {
+  let data = localStorage.getItem("city_history");
   let searches = JSON.parse(data);
 
   return searches;
 }
 
 function init() {
-  let searches = getSearches();
+  let searches = getCities();
   console.log(searches);
 
   // Todo search for city
