@@ -26,6 +26,8 @@ function saveCity(city) {
     let data = localStorage.getItem("city_history");
     let cities = JSON.parse(data);
 
+    console.log(cities);
+
     if (cities == null) {
         cities = [
             city,
@@ -34,7 +36,7 @@ function saveCity(city) {
         cities.unshift(city);
     }
 
-    localStorage.setItem('city_history', JSON.stringify(city))
+    localStorage.setItem('city_history', JSON.stringify(cities))
 }
 
 // Search for city
@@ -46,21 +48,19 @@ async function searchFor(string) {
 }
 
 function init() {
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
-        doStuff();
         // Search for city
         let city = await searchFor(search.value);
         if (city == null)
             return;
 
         // Save city to local storage
-        console.log(city);
         saveCity(city);
 
         // Go to weather page
-        //window.location.replace('../assets/pages/weather.html');
+        window.location.replace('../assets/pages/weather.html');
     });
 }
 
