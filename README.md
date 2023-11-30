@@ -1,5 +1,5 @@
-# weather-app
- Weather app using api requests.
+# Awesome Weather App
+Experiment with api requests.
 
 ## About
 Really simple weather app. It uses the OpenWeather API for all the data.
