@@ -57,8 +57,9 @@ function init() {
         // Save city to local storage
         saveCity(city);
 
+        
         // Go to weather page
-        window.location.href = './weather-app/assets/pages/weather.html';
+        window.location.href = 'https://canadianbleach.github.io/weather-app/assets/pages/weather.html';
     });
 }
 
