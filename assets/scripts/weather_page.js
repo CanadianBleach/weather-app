@@ -9,8 +9,10 @@ let searchHistory = document.querySelector("#history");
 // Search for city
 let searches = getCities();
 
-if (searches == null)
-  console.log("HELP ME");
+if (searches == null) {
+  window.location.replace('../../index.html');
+}
+
 // Get weather for first city
 let cities = searches[0];
 let city = cities[0];

@@ -20,7 +20,17 @@
   <body>
     <div class="container mw-80">
       <h1 class="display-3 pl-3 m-3 row">Weather</h1>
-      <h2 class="pl-3 m-3 row"><a href="../../index.html">Search</a></h2>
+      <div class="d-flex">
+        <a href="../../index.html">
+          <button class="btn btn-lg btn-primary m-4">Search</button>
+        </a>
+        <button
+          class="btn btn-lg btn-primary m-4"
+          onclick="localStorage.clear()"
+        >
+          Clear Saved
+        </button>
+      </div>
       <div
         id="tile-parent"
         class="row w-100 d-flex flex-wrap p-2 justify-content-around"
