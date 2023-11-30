@@ -26,8 +26,6 @@ function saveCity(city) {
     let data = localStorage.getItem("city_history");
     let cities = JSON.parse(data);
 
-    console.log(cities);
-
     if (cities == null) {
         cities = [
             city,

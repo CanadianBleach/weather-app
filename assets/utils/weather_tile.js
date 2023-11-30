@@ -42,7 +42,7 @@ export default class WeatherTile extends HTMLElement {
 			<span class="d-inline-flex mt-2 p-2 justify-content-between">
 			  <h4 class="m-1">${temp}\u{00BA}</h4>
 			  <h4 class="m-1">${humidity}%</h4>
-			  <h4 class="m-1">${windSpeed}</h4>
+			  <h4 class="m-1">${windSpeed} mph</h4>
 			</span>
 		  </div>`;
 	}

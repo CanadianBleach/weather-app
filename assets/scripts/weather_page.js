@@ -4,6 +4,7 @@ import { fetchData } from '../utils/utils.js';
 
 let container = document.querySelector("#tile-parent");
 let header = document.querySelector("h1");
+let searchHistory = document.querySelector("#history");
 
 // Search for city
 let searches = getCities();
@@ -29,6 +30,26 @@ function getCities() {
   return searches;
 }
 
+function saveCities(list) {
+  let data = localStorage.getItem("city_history");
+  let cities = JSON.parse(data);
+
+  if (cities == null)
+    return;
+
+  localStorage.setItem('city_history', JSON.stringify(list))
+}
+
+function cycleWeather() {
+  console.log(searches);
+  let index = document.activeElement.id;
+  let element = searches[index];
+  searches.splice(index, 1);
+  searches.unshift(element);
+  saveCities(searches);
+  location.reload();
+}
+
 function init() {
   // Create a tiles for days we want
   for (let i = 0; i < 5; i++) {
@@ -36,6 +57,25 @@ function init() {
     elem.classList.add("col-sm");
     container.appendChild(elem);
   }
+  
+  // Move current city to back of list
+  let removed = searches.shift()
+
+  for (let s in searches) {
+    // Create and populate button
+    let element = document.createElement("button");
+    element.classList.add("btn", "m-2");
+    element.id = s;
+    element.textContent = searches[s][0].name;
+
+    // Add event listener
+    element.addEventListener("click", cycleWeather);
+
+    searchHistory.appendChild(element);
+  }
+
+  // Add element back
+  searches.push(removed);
 }
 
 init();
