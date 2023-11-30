@@ -40,7 +40,7 @@ function saveCity(city) {
 // Search for city
 async function searchFor(string) {
     let toSearch = textToSearch(string);
-    let url = `http://api.openweathermap.org/geo/1.0/direct?q=${toSearch.city},${toSearch.state},USA&appid=${key}`;
+    let url = `https://api.openweathermap.org/geo/1.0/direct?q=${toSearch.city},${toSearch.state},USA&appid=${key}`;
 
     return await fetchData(url);
 }
