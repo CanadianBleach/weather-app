@@ -58,7 +58,7 @@ function init() {
         saveCity(city);
 
         // Go to weather page
-        window.location.replace('./weather-app/assets/pages/weather.html');
+        window.location.href = './weather-app/assets/pages/weather.html';
     });
 }
 
